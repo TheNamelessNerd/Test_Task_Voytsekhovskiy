@@ -1,0 +1,65 @@
+Test task 2.
+
+
+P0 (critical) test cases for CREATE:
+
+1. Verification of format.
+Steps: 	1)Check that all mandatory fields in request body are filled.
+	2)Check that content of all mandatory fields has suitable formatting.(userId is a natural number, title and body have appropriate length)
+Expected result: Request body is complete and correct.
+
+2. Verification of status code.
+Steps: 	1)Send CREATE request.
+	2)Check status code.
+Expected result: Status code 201 (Created).
+
+3. Verification of response.
+Steps: 	1)Check that response is a JSON object
+	2)Check that response has all necessary fields.
+Expected result: Response is a well-formed JSON object containing all necessary and required information.
+
+4. Vetification of creation.
+Steps:	1)Sed GET request for created resource.
+	2)Check that response is a JSON object
+	3)Check that response body contains all information you put in CREATE request in necessary fields.
+Expected result: Response body is a well-formed JSON object containing all information sent in CREATE request.
+
+
+P0 (critical) test cases for UPDATE:
+
+1. Verification of format.
+Steps:	1)Check that content of all fields in request body has suitable formatting.(id is a natural number, userId is a natural number (if it's subject to update) title and body have appropriate length (if it's subject to update))
+Expected result: Request body is correct and request can be sent to API.
+
+2. Verification of status code.
+Steps: 	1)Send CREATE request.
+	2)Check status code.
+Expected result: Status code 200 (OK).
+
+3. Vetification of creation.
+Steps:	1)Sed GET request for updated resource.
+	2)Check that response is a JSON object.
+	3)Check that response body contains all information you put in UPDATE request in necessary fields.
+Expected result: Response body is a well-formed JSON object containing all updated information sent in UPDATE request.
+
+
+P0 (critical) test cases for UPDATE:
+
+1. Verification of format.
+Steps:	1)Check that id in the request of the body is a natural number.
+Expected result: Request body contains suitable id.
+
+2. Verification of existing.
+Steps:	1)Send GET request by given id.
+	2)Check status code.
+Expected result: Status code 200 (OK), resource exists and can be deleted.
+
+3. Verification of status code.
+Steps: 	1)Send DELETE request.
+	2)Check status code.
+Expected result: Status code 200 (OK).
+
+4. Verification of deletion.
+Steps:	1)Send GET request by given id.
+	2)Check status code.
+Expected result: Status code 404 (Not Found), resource does not exist, deletion was succesful.
