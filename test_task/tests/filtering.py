@@ -1,48 +1,51 @@
 import requests
+import pytest
+from random import randint
 
-#Type desired userID
-my_userid='8'
+my_userid = randint(1, 10)
+
+# Expected IDs for this userID
+expected_ids = [i for i in range((my_userid - 1) * 10 + 1, my_userid * 10 + 1)]
 
 
-#To run the test copy this in Terminal: pytest tests\filtering.py
+@pytest.fixture()
+def url():
+    return f"https://jsonplaceholder.typicode.com/posts?userId={my_userid}"
 
 
-def test_if_user_id_is_correct():
-    assert my_userid in range(1,11)
-
-url = f"https://jsonplaceholder.typicode.com/posts?userId={my_userid}"
-my_userid =int(my_userid)
-
-#Expected IDs for this userID
-expected_ids = [i for i in range((my_userid-1)*10+1,my_userid*10+1)]
-
-def test_filtering_check_status_code_equals_200():
+@pytest.fixture()
+def res(url):
     response = requests.get(url)
-    assert response.status_code == 200
+    return response
 
 
-def test_filtering_header_type_equals_json():
-    response = requests.get(url)
-    assert response.headers['Content-Type'] == "application/json; charset=utf-8"
-    assert response.headers['Connection'] == "keep-alive"
-    assert response.headers['cache-control'] == "max-age=43200"
+@pytest.fixture()
+def res_body(url):
+    response_body = requests.get(url).json()
+    return response_body
 
 
-def test_filtering_id_number_is_correct_and_equals_10():
-    response = requests.get(url)
-    response_body = response.json()
-    assert len(response_body) == 10
+def test_filtering_user_id_is_appropriate():
+    assert my_userid in range(1, 11)
 
 
-def test_filtering_user_id_is_correct():
-    response = requests.get(url)
-    response_body = response.json()
-    for i in response_body:
+def test_filtering_check_status_code_equals_200(res):
+    assert res.status_code == 200
+
+
+def test_filtering_header_type_equals_json(res):
+    assert res.headers['Content-Type'] == "application/json; charset=utf-8"
+
+
+def test_filtering_id_quantity_is_correct_and_equals_10(res_body):
+    assert len(res_body) == 10
+
+
+def test_filtering_user_id_is_correct(res_body):
+    for i in res_body:
         assert i["userId"] == my_userid
 
 
-def test_filtering_associated_ids_are_correct():
-    response = requests.get(url)
-    response_body = response.json()
-    for i in response_body:
+def test_filtering_associated_ids_are_correct(res_body):
+    for i in res_body:
         assert i["id"] in expected_ids

@@ -1,44 +1,41 @@
 import requests
-
-#To run the test copy this in Terminal: pytest tests\get_list_of_all.py
-
+import pytest
 
 
-url = "https://jsonplaceholder.typicode.com/posts/"
+@pytest.fixture()
+def url():
+    return "https://jsonplaceholder.typicode.com/posts/"
 
 
-def test_getall_check_status_code_equals_200():
+@pytest.fixture()
+def res(url):
     response = requests.get(url)
-    assert response.status_code == 200
+    return response
 
 
-def test_getall_header_type_equals_json():
-    response = requests.get(url)
-    assert response.headers['Content-Type'] == "application/json; charset=utf-8"
-    assert response.headers['Connection'] == "keep-alive"
-    assert response.headers['cache-control'] == "max-age=43200"
+@pytest.fixture()
+def res_body(url):
+    response_body = requests.get(url).json()
+    return response_body
 
 
-def test_get_all_id_number_is_correct_and_equals_100():
-    response = requests.get(url)
-    response_body = response.json()
-    assert len(response_body) == 100
+def test_get_all_check_status_code_equals_200(res):
+    assert res.status_code == 200
 
 
-def test_get_all_user_id_is_correct():
-    response = requests.get(url)
-    response_body = response.json()
-
-    for id in response_body:
-        if id % 10 == 0:
-            my_user_id = id // 10
-        else:
-            my_user_id = (id + 10) // 10
-        assert id["userId"] == my_user_id
+def test_get_all_header_type_equals_json(res):
+    assert res.headers['Content-Type'] == "application/json; charset=utf-8"
 
 
-def test_filtering_associated_ids_are_correct():
-    response = requests.get(url)
-    response_body = response.json()
-    for i in range(1,101) in response_body:
-        assert i["id"] == i
+def test_get_all_id_quantity_is_correct_and_equals_100(res_body):
+    assert len(res_body) == 100
+
+
+def test_get_all_user_ids_are_correct(res_body):
+    for user in res_body:
+        assert user["userId"] in range(1,11)
+
+
+def test_get_all_ids_are_correct(res_body):
+    for i, id_k in (enumerate(res_body, 1)):
+        assert id_k["id"] == i
