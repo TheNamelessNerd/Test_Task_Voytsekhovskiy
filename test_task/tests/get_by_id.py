@@ -2,7 +2,7 @@ import requests
 import random
 
 
-# k is the size of random test pool of IDs, set to 100 to test all, or set my_ids to desired list of IDs
+# k is the size of random test pool of IDs, set to 100 to test all, or set my_ids to desired list of IDs, the test itself will work anyway.
 k = 10
 
 ids = range(1, 101)
