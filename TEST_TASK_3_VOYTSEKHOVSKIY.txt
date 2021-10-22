@@ -4,8 +4,8 @@ ID: 01
 Summary: 404 (Not Found) instead of 200 (OK) when trying to send GET request on /posts/0.
 Bug severity: Minor
 Bug priority: Minor
-Steps to reproduce: 1)Send GET request on https://jsonplaceholder.typicode.com/posts/0
+Steps to reproduce: 1) Send GET request on https://jsonplaceholder.typicode.com/posts/0
 		    2)Check status code and body of response.	
 Expected result: Status code 200 (OK) with empty list in body of response.
 Actual result: Status code 404 (Not Found).
-Envinronment: PC, Windows 10 Pro, Firefox 93.0
+Environment: PC, Windows 10 Pro, Firefox 93.0
