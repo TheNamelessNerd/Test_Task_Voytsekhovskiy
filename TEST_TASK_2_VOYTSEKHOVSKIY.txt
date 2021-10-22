@@ -36,7 +36,7 @@ Steps: 	1) Send CREATE request.
 	2) Check status code.
 Expected result: Status code 200 (OK).
 
-3. Verification of creation.
+3. Verification of update.
 Steps:	1) Send GET request for updated resource.
 	2) Check that response is a JSON object.
 	3) Check that response body contains all information you put in UPDATE request in necessary fields.
@@ -52,7 +52,7 @@ Expected result: Request body contains suitable id.
 2. Verification of existing.
 Steps:	1) Send GET request by given id.
 	2) Check status code.
-Expected result: Status code 200 (OK), resource exists and can be deleted.
+Expected result: Status code 200 (OK), resource with this id exists and can be deleted.
 
 3. Verification of status code.
 Steps: 	1) Send DELETE request.
