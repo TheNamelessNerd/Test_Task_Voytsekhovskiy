@@ -5,17 +5,17 @@ P0 (critical) test cases for CREATE:
 
 1. Verification of format.
 Steps: 	1) Check that all mandatory fields in request body are filled.
-	2)Check that content of all mandatory fields has suitable formatting. (userId is a natural number, title and body have appropriate length)
+	2) Check that content of all mandatory fields has suitable formatting. (userId is a natural number, title and body have appropriate length)
 Expected result: Request body is complete and correct.
 
 2. Verification of status code.
 Steps: 	1) Send CREATE request.
-	2)Check status code.
+	2) Check status code.
 Expected result: Status code 201 (Created).
 
 3. Verification of response.
 Steps: 	1) Check that response is a JSON object
-	2)Check that response has all necessary fields.
+	2) Check that response has all necessary fields.
 Expected result: Response is a well-formed JSON object containing all necessary and required information.
 
 4. Verification of creation.
@@ -51,12 +51,12 @@ Expected result: Request body contains suitable id.
 
 2. Verification of existing.
 Steps:	1) Send GET request by given id.
-	2)Check status code.
+	2) Check status code.
 Expected result: Status code 200 (OK), resource exists and can be deleted.
 
 3. Verification of status code.
 Steps: 	1) Send DELETE request.
-	2)Check status code.
+	2) Check status code.
 Expected result: Status code 200 (OK).
 
 4. Verification of deletion.
